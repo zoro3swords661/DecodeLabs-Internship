@@ -33,7 +33,7 @@ It also gives tips on what to improve and shows a color bar so you can see the s
 Make sure you have Python installed (3.x). Tkinter comes with Python so no extra installs needed.
 
 ```bash
-python password_checker_ui.py
+paswword strength checker/password.py
 ```
 
 That's it.
@@ -62,7 +62,7 @@ Each condition gives 1 point. Max score is 6.
 ## Files
 
 ```
-password_checker_ui.py   - main file, run this
+paswword strength checker/password.py   - main file, run this
 README.md                - this file
 ```
 
