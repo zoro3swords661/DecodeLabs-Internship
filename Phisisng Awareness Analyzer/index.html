@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phishing Triage Analyzer — DecodeLabs Project 3</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="app">
+  <div class="brand">
+    <div class="glyph" aria-hidden="true"></div>
+    <div>
+      <h1>Phishing Triage Analyzer</h1>
+      <div class="sub">DecodeLabs · Project 3 · Detection Phase</div>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="tag">Pause · Verify · Report</div>
+</header>
+
+<div class="wrap">
+  <div class="grid">
+    <!-- INPUT -->
+    <section class="panel" aria-label="Message input">
+      <div class="panel-h"><span class="n">01</span><h2>Message under analysis</h2><span class="hint">paste a message to triage</span></div>
+      <div class="panel-body">
+        <div class="field">
+          <label class="f" for="sender">Sender (From)</label>
+          <input class="t" id="sender" placeholder='e.g. CEO Name &lt;ceo.urgent@executive-update.com&gt;'>
+        </div>
+        <div class="field">
+          <label class="f" for="claim">Claims to be from (brand/org) — optional</label>
+          <input class="t" id="claim" placeholder="e.g. Microsoft, company.com, ChatGPT">
+        </div>
+        <div class="field">
+          <label class="f" for="subject">Subject</label>
+          <input class="t" id="subject" placeholder="e.g. IMMEDIATE ACTION REQUIRED: Transfer Authorization">
+        </div>
+        <div class="field">
+          <label class="f" for="body">Body</label>
+          <textarea class="t" id="body" placeholder="Paste the full message text here..."></textarea>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label class="f" for="links">Links (one per line)</label>
+            <textarea class="t" id="links" style="min-height:70px" placeholder="https://account.microsoft.com.logins-updates.com/verify"></textarea>
+          </div>
+          <div class="field">
+            <label class="f" for="attach">Attachments (one per line)</label>
+            <textarea class="t" id="attach" style="min-height:70px" placeholder="Security_Update_2024.iso"></textarea>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn-primary" id="run">Analyze message</button>
+          <button class="btn-ghost" id="clear">Clear</button>
+        </div>
+
+        <div class="examples">
+          <p>Load a sample input (from the Project 3 report) to demo the analyzer:</p>
+          <div class="chips" id="chips"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULT -->
+    <section class="panel" aria-label="Triage result">
+      <div class="panel-h"><span class="n">02</span><h2>Triage result</h2><span class="hint" id="resHint">awaiting input</span></div>
+      <div class="panel-body" id="result">
+        <div class="empty">
+          <div class="big">⌖</div>
+          Enter a message and run <strong>Analyze</strong>, or load a sample.<br>
+          The analyzer inspects the sender, links, attachments, and language,<br>then returns a Close / Warn / Block verdict.
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="sec-label">How the verdict maps to action <span class="ct">— every event ends in a definitive outcome</span></div>
+    <div class="legend-grid">
+      <div class="lg safe"><div class="top"><span>SAFE</span><span>→ Close</span></div><div class="bd">Sender verified, no triggers, normal attachment. Close — no action needed.</div></div>
+      <div class="lg warn"><div class="top"><span>SUSPICIOUS</span><span>→ Warn User</span></div><div class="bd">Some indicators, unconfirmed. Warn the user and verify out-of-band before acting.</div></div>
+      <div class="lg mal"><div class="top"><span>MALICIOUS</span><span>→ Block &amp; Escalate</span></div><div class="bd">Clear indicators. Block the sender domain, report, and escalate to security.</div></div>
+    </div>
+  </div>
+</div>
+
+<footer class="app">
+  <div class="disc">
+    <strong>About the data &amp; method.</strong> This tool applies detection rules derived from documented phishing patterns
+    (sender/display-name mismatch, right-to-left URL root analysis, URL-shortener detection, dangerous attachment types,
+    and psychological keyword triggers). It analyzes whatever message <em>you</em> paste in — it does not contain a hidden
+    database of real emails. The loadable samples are illustrative examples reconstructed from the attack types shown in the
+    Project 3 brief, provided so the analyzer can be demonstrated live.
+  </div>
+  <p style="margin-top:12px">DecodeLabs · Cyber Security · Project 3 — Phishing Awareness Analysis · Batch 2026 &nbsp;|&nbsp; Golden rule: <strong>Pause · Verify · Report</strong></p>
+</footer>
+
+<script src="analyzer.js"></script>
+</body>
+</html>
